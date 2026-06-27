@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Berita terkini Fakultas Ekonomi dan Bisnis Universitas Musi Rawas (FEB UNMURA)">
+<meta name="theme-color" content="#0B2E5F">
+<title>Berita — FEB UNMURA</title>
+
+<!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║  FONT SELF-HOST — 0 request eksternal ke Google Fonts   ║
+  ║  Langkah setup (lakukan sekali):                        ║
+  ║  1. Buka: https://gwfh.madewithlove.com/fonts/plus-jakarta-sans
+  ║     Pilih weight: 400, 600, 700, 800 → klik Download   ║
+  ║  2. Ekstrak → salin folder "plus-jakarta-sans/" ke root ║
+  ║     server Anda (sejajar dengan berita.html)            ║
+  ║  3. File yang dibutuhkan (woff2 saja, paling kecil):    ║
+  ║     plus-jakarta-sans-v3-latin-regular.woff2            ║
+  ║     plus-jakarta-sans-v3-latin-600.woff2                ║
+  ║     plus-jakarta-sans-v3-latin-700.woff2                ║
+  ║     plus-jakarta-sans-v3-latin-800.woff2                ║
+  ║  Selama file belum ada, fallback ke system-ui otomatis. ║
+  ╚══════════════════════════════════════════════════════════╝
+-->
+<style>
+@font-face{
+  font-family:'Plus Jakarta Sans';
+  font-style:normal;font-weight:400;font-display:swap;
+  src:url('fonts/plus-jakarta-sans-v3-latin-regular.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Plus Jakarta Sans';
+  font-style:normal;font-weight:600;font-display:swap;
+  src:url('fonts/plus-jakarta-sans-v3-latin-600.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Plus Jakarta Sans';
+  font-style:normal;font-weight:700;font-display:swap;
+  src:url('fonts/plus-jakarta-sans-v3-latin-700.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Plus Jakarta Sans';
+  font-style:normal;font-weight:800;font-display:swap;
+  src:url('fonts/plus-jakarta-sans-v3-latin-800.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+</style>
+<!-- Preload font utama (weight 400 & 700) agar muncul lebih cepat -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/plus-jakarta-sans-v3-latin-regular.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/plus-jakarta-sans-v3-latin-700.woff2">
+
+<style>
+/* ── RESET & ROOT ── */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue-dark:#0B2E5F;
+  --blue-mid:#185FA5;
+  --blue-light:#E6F1FB;
+  --blue-pale:#F0F6FC;
+  --gold:#C4962A;
+  --gold-light:#FBF4E4;
+  --font-sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:16px;
+}
+body{font-family:var(--font-sans);background:#F8FAFB;color:#0B2E5F;min-height:100vh}
+
+/* ── HEADER ── */
+.header{
+  background:var(--blue-dark);
+  padding:0 5%;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 12px rgba(11,46,95,0.2);
+}
+.btn-back{
+  display:flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.18);
+  color:#fff;font-size:13px;font-weight:600;
+  padding:7px 14px;border-radius:6px;cursor:pointer;
+  font-family:var(--font-sans);
+  transition:background .15s,border-color .15s;
+  text-decoration:none;
+}
+.btn-back:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.35)}
+.btn-back svg{width:15px;height:15px;flex-shrink:0}
+.header-title{
+  font-size:14px;font-weight:600;color:#fff;opacity:0.85;
+  position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;
+}
+.header-right{width:90px}
+
+/* ── HERO STRIP ── */
+.hero-strip{
+  background:linear-gradient(135deg,var(--blue-dark) 0%,#1a4f9c 60%,#0d3b7a 100%);
+  padding:clamp(28px,4vw,48px) 5% clamp(20px,3vw,36px);
+  position:relative;overflow:hidden;
+}
+/* Dekorasi lingkaran gold */
+.hero-strip::before{
+  content:"";position:absolute;top:-80px;right:-80px;
+  width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,150,42,0.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+/* Dekorasi dot grid pattern — pure CSS, 0 request tambahan */
+.hero-strip::after{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,0.07) 1px,transparent 1px);
+  background-size:22px 22px;
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:1}
+.hero-eyebrow{font-size:11px;color:rgba(255,255,255,0.45);font-weight:600;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px}
+.hero-title{font-size:clamp(24px,3vw,34px);font-weight:800;color:#fff;letter-spacing:-0.3px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.hero-sub{font-size:13.5px;color:rgba(255,255,255,0.55);max-width:480px;line-height:1.7}
+
+/* ── TOOLBAR ── */
+.toolbar{
+  background:#fff;border-bottom:1px solid #E5EBF2;
+  padding:14px 5%;display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;position:sticky;top:60px;z-index:90;
+}
+.search-wrap{position:relative;flex:1;min-width:180px;max-width:320px}
+
+/* UPGRADE #2: Ganti emoji search-ico dengan SVG */
+.search-ico{
+  position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  pointer-events:none;color:#9BAAB8;display:flex;
+}
+.search-ico svg{width:14px;height:14px}
+
+.search-input{
+  width:100%;padding:8px 12px 8px 34px;
+  border-radius:7px;border:1.5px solid #D4DDE8;
+  background:#F8FAFB;color:#0B2E5F;font-size:13px;
+  font-family:var(--font-sans);outline:none;transition:border-color .15s;
+}
+.search-input:focus{border-color:var(--blue-mid);background:#fff}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap}
+.ftag{
+  padding:6px 13px;border-radius:20px;
+  font-size:11.5px;font-weight:600;cursor:pointer;
+  border:1.5px solid #D4DDE8;background:#fff;
+  color:#6B7B8D;font-family:var(--font-sans);
+  transition:all .15s;white-space:nowrap;
+}
+.ftag:hover,.ftag.active{background:var(--blue-dark);color:#fff;border-color:var(--blue-dark)}
+.ftag[data-kat="Prestasi"].active,.ftag[data-kat="Prestasi"]:hover{background:#C4750A;border-color:#C4750A;color:#fff}
+.ftag[data-kat="Kerjasama"].active,.ftag[data-kat="Kerjasama"]:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+.ftag[data-kat="Akademik"].active,.ftag[data-kat="Akademik"]:hover{background:var(--blue-mid);border-color:var(--blue-mid);color:#fff}
+.ftag[data-kat="Kegiatan"].active,.ftag[data-kat="Kegiatan"]:hover{background:#2B9D7A;border-color:#2B9D7A;color:#fff}
+.ftag[data-kat="Seminar"].active,.ftag[data-kat="Seminar"]:hover{background:#6B4FC2;border-color:#6B4FC2;color:#fff}
+
+/* ── BODY ── */
+.body{padding:clamp(24px,4vw,40px) 5%}
+
+/* Stats row */
+.stats-row{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}
+.stat-chip{
+  display:flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:8px;
+  background:#fff;border:1px solid #E5EBF2;
+  font-size:12px;color:#6B7B8D;
+}
+.stat-chip svg{width:14px;height:14px;opacity:.55;flex-shrink:0}
+.stat-chip strong{color:var(--blue-dark);font-size:14px;font-weight:700}
+
+/* Grid berita */
+/* UPGRADE #12: content-visibility agar browser skip render card di luar viewport */
+.berita-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  content-visibility:auto;
+  contain-intrinsic-size:0 800px;
+}
+
+/* Card */
+/* UPGRADE #7: hover dengan left-border accent warna kategori */
+.berita-card{
+  background:#fff;
+  border:1px solid #D4DDE8;
+  border-left:3px solid transparent;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  cursor:pointer;
+  transition:border-color .2s,box-shadow .25s,transform .2s;
+  display:flex;flex-direction:column;
+  /* Dimulai tidak visible — UPGRADE #11 IntersectionObserver yang atur */
+  opacity:0;transform:translateY(18px);
+}
+/* Class yang ditambah oleh IntersectionObserver */
+.berita-card.is-visible{
+  opacity:1;transform:translateY(0);
+  transition:opacity .45s ease,transform .45s ease,border-color .2s,box-shadow .25s;
+}
+.berita-card:hover{
+  box-shadow:0 8px 28px rgba(11,46,95,0.12);
+  transform:translateY(-3px);
+}
+/* Left accent sesuai kategori saat hover */
+.berita-card[data-kat="Prestasi"]:hover{border-left-color:#C4750A}
+.berita-card[data-kat="Kerjasama"]:hover{border-left-color:var(--gold)}
+.berita-card[data-kat="Akademik"]:hover{border-left-color:var(--blue-mid)}
+.berita-card[data-kat="Kegiatan"]:hover{border-left-color:#2B9D7A}
+.berita-card[data-kat="Seminar"]:hover{border-left-color:#6B4FC2}
+.berita-card:hover:not([data-kat]){border-left-color:var(--blue-mid)}
+
+/* Thumbnail */
+.card-img-wrap{
+  position:relative;width:100%;aspect-ratio:16/9;
+  overflow:hidden;
+  background:linear-gradient(135deg,var(--blue-pale) 0%,#dce8f5 100%);
+  flex-shrink:0;
+}
+.card-img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;display:block;
+  transition:transform .4s ease;
+}
+.berita-card:hover .card-img{transform:scale(1.06)}
+.card-img-fallback{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+}
+/* Fallback: SVG icon kategori bukan emoji */
+.card-img-fallback svg{width:40px;height:40px;opacity:.25}
+
+.card-badge{
+  position:absolute;top:10px;left:10px;z-index:2;
+  font-size:9.5px;font-weight:700;
+  padding:3px 8px;border-radius:4px;
+  text-transform:uppercase;letter-spacing:0.5px;
+}
+
+/* Body card */
+.card-body{padding:14px 16px;display:flex;flex-direction:column;flex:1}
+.card-title{
+  font-size:13.5px;font-weight:700;color:var(--blue-dark);
+  line-height:1.55;margin-bottom:8px;
+  overflow:hidden;display:-webkit-box;
+  -webkit-line-clamp:2;-webkit-box-orient:vertical;
+}
+.card-desc{
+  font-size:12px;color:#5A6B7C;line-height:1.65;
+  overflow:hidden;display:-webkit-box;
+  -webkit-line-clamp:3;-webkit-box-orient:vertical;
+  flex:1;margin-bottom:12px;
+}
+.card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:10px;border-top:1px solid #F0F4F8;
+  gap:6px;flex-wrap:wrap;
+}
+/* UPGRADE #2: card-date & card-author pakai SVG, bukan emoji */
+.card-date{font-size:11px;color:#9BAAB8;display:flex;align-items:center;gap:4px}
+.card-date svg{width:12px;height:12px;flex-shrink:0}
+.card-author{font-size:11px;color:#9BAAB8;display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:120px}
+.card-author svg{width:12px;height:12px;flex-shrink:0}
+
+/* ── UPGRADE #1: SKELETON LOADING ── */
+.skeleton-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.skeleton-card{
+  background:#fff;border:1px solid #E5EBF2;
+  border-radius:var(--radius-md);overflow:hidden;
+}
+.skel-img{
+  width:100%;aspect-ratio:16/9;
+  background:linear-gradient(90deg,#E8EEF4 25%,#F4F7FA 50%,#E8EEF4 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.4s ease-in-out infinite;
+}
+.skel-body{padding:14px 16px}
+.skel-line{
+  height:12px;border-radius:4px;margin-bottom:8px;
+  background:linear-gradient(90deg,#E8EEF4 25%,#F4F7FA 50%,#E8EEF4 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.4s ease-in-out infinite;
+}
+.skel-line.title{height:14px;width:80%;margin-bottom:10px}
+.skel-line.title2{height:14px;width:60%;margin-bottom:14px}
+.skel-line.desc{width:100%}
+.skel-line.desc2{width:90%}
+.skel-line.desc3{width:75%}
+.skel-footer{display:flex;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid #F0F4F8}
+.skel-line.date{width:70px;height:10px}
+.skel-line.author{width:80px;height:10px}
+@keyframes shimmer{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
+
+/* ── STATES ── */
+.state-wrap{
+  grid-column:1/-1;text-align:center;padding:60px 20px;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.state-icon{width:40px;height:40px;opacity:.35}
+.state-title{font-size:15px;font-weight:600;color:var(--blue-dark)}
+.state-sub{font-size:13px;color:#9BAAB8;max-width:340px;line-height:1.6}
+
+/* ── UPGRADE #5: MODAL DETAIL ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(7,24,52,0.55);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center;
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:#fff;width:100%;max-width:640px;
+  border-radius:20px 20px 0 0;
+  max-height:90vh;overflow-y:auto;
+  transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.32,.72,0,1);
+  padding:0;
+}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-drag{
+  width:40px;height:4px;border-radius:2px;
+  background:#D4DDE8;margin:14px auto 0;
+}
+.modal-header{padding:16px 20px 14px;border-bottom:1px solid #F0F4F8}
+.modal-badge{
+  display:inline-block;font-size:9.5px;font-weight:700;
+  padding:3px 8px;border-radius:4px;
+  text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;
+}
+.modal-title{font-size:17px;font-weight:800;color:var(--blue-dark);line-height:1.45}
+.modal-meta{display:flex;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap}
+.modal-meta-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:#9BAAB8}
+.modal-meta-item svg{width:13px;height:13px;flex-shrink:0}
+.modal-img-section{
+  padding:0 20px 0;
+  margin-top:2px;
+}
+.modal-img{
+  width:100%;
+  max-height:220px;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+  border-radius:10px;
+  box-shadow:0 2px 12px rgba(11,46,95,0.10);
+}
+.modal-img-placeholder{
+  width:100%;height:160px;
+  background:linear-gradient(135deg,var(--blue-pale),#dce8f5);
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;
+}
+.modal-img-placeholder svg{width:40px;height:40px;opacity:.2}
+.modal-body{padding:16px 20px 28px}
+.modal-divider{
+  border:none;border-top:1px solid #EEF2F7;margin:14px 0;
+}
+.modal-desc{
+  font-size:14px;color:#3D4F62;line-height:1.85;
+  text-align:justify;
+}
+.modal-desc p{margin-bottom:10px}
+.modal-desc p:last-child{margin-bottom:0}
+.modal-read-more{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:16px;
+  font-size:12.5px;font-weight:600;color:var(--blue-mid);
+  background:var(--blue-light);
+  padding:7px 14px;border-radius:6px;
+  text-decoration:none;
+  transition:background .15s;
+}
+.modal-read-more:hover{background:#d0e6f7}
+.modal-read-more svg{width:13px;height:13px}
+.modal-close{
+  position:absolute;top:12px;right:14px;
+  background:rgba(0,0,0,0.06);border:none;
+  width:32px;height:32px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+.modal-close:hover{background:rgba(0,0,0,0.12)}
+.modal-close svg{width:16px;height:16px}
+.modal-header{position:relative}
+
+/* ── UPGRADE #10: FOOTER dengan ikon sosmed ── */
+.page-footer{
+  background:var(--blue-dark);
+  padding:28px 5% 20px;
+  margin-top:48px;
+}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;
+  margin-bottom:16px;
+}
+.footer-brand{
+  font-size:13px;font-weight:700;color:#fff;
+}
+.footer-brand span{display:block;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);margin-top:2px}
+.footer-socials{display:flex;gap:8px}
+.social-btn{
+  width:34px;height:34px;border-radius:8px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s,border-color .15s,transform .15s;
+  text-decoration:none;
+  cursor:pointer;
+}
+.social-btn:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.3);transform:translateY(-2px)}
+.social-btn svg{width:16px;height:16px;fill:#fff;display:block}
+.footer-divider{border:none;border-top:1px solid rgba(255,255,255,0.08);margin-bottom:14px}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.3);text-align:center}
+
+/* ── CARD HORIZONTAL (sm & xs): sudut kiri tetap rounded ── */
+@media(max-width:599px){
+  .berita-card{
+    border-left-width:1px; /* reset left accent agar tidak tebal di horizontal */
+  }
+  .card-img-wrap{
+    border-radius:0; /* kiri atas & bawah dihandle via overflow:hidden card */
+  }
+  /* Pastikan badge tidak terpotong */
+  .card-badge{font-size:9px;padding:2px 7px}
+}
+
+/* ── CACHE REFRESH BADGE ── */
+#refresh-badge{font-family:var(--font-sans)}
+.btn-clear-cache{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.5);
+  font-size:11px;font-family:var(--font-sans);
+  padding:4px 10px;border-radius:4px;cursor:pointer;
+  transition:background .15s,color .15s;margin-top:6px;
+}
+.btn-clear-cache:hover{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.85)}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE SYSTEM — 6 breakpoint
+   xs  : < 400px   → HP kecil / lipat (Galaxy Fold, iPhone SE)
+   sm  : 400–599px → HP standar (iPhone 14, Redmi, Samsung A)
+   md  : 600–899px → HP besar / tablet portrait (iPad Mini)
+   lg  : 900–1199px → Tablet landscape / laptop kecil
+   xl  : 1200–1535px → Laptop / desktop standar
+   2xl : ≥ 1536px  → Monitor lebar / TV / ultrawide
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 2xl: ≥ 1536px — Monitor lebar / ultrawide ── */
+@media(min-width:1536px){
+  .header{padding:0 8%}
+  .hero-strip{padding:56px 8% 44px}
+  .toolbar{padding:16px 8%}
+  .body{padding:48px 8%}
+  .page-footer{padding:36px 8% 24px}
+  .berita-grid,.skeleton-grid{
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+  }
+  .card-title{font-size:14.5px}
+  .hero-title{font-size:40px}
+  .hero-sub{font-size:15px;max-width:580px}
+}
+
+/* ── xl: 1200–1535px — Laptop/desktop standar (default 3 kolom sudah oke) ── */
+@media(min-width:1200px) and (max-width:1535px){
+  .berita-grid,.skeleton-grid{gap:22px}
+}
+
+/* ── lg: 900–1199px — Tablet landscape / laptop kecil ── */
+@media(min-width:900px) and (max-width:1199px){
+  .berita-grid,.skeleton-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+  }
+  .header{padding:0 4%}
+  .hero-strip{padding:clamp(24px,3vw,40px) 4% clamp(18px,2.5vw,32px)}
+  .toolbar{padding:12px 4%}
+  .body{padding:clamp(20px,3vw,36px) 4%}
+  .page-footer{padding:24px 4% 18px}
+}
+
+/* ── md: 600–899px — HP besar / tablet portrait ── */
+@media(min-width:600px) and (max-width:899px){
+  .berita-grid,.skeleton-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+  }
+  .header{padding:0 4%;height:56px}
+  .header-title{display:none}
+  .hero-strip{padding:24px 4% 20px}
+  .hero-title{font-size:26px}
+  .hero-sub{font-size:13px}
+  .toolbar{top:56px;padding:11px 4%;gap:8px}
+  .search-wrap{max-width:260px}
+  .body{padding:22px 4%}
+  .page-footer{padding:22px 4% 16px}
+  /* Modal: centered dialog di tablet */
+  .modal-overlay{align-items:center}
+  .modal-box{border-radius:16px;max-height:85vh;max-width:580px}
+  .modal-drag{display:none}
+}
+
+/* ── sm: 400–599px — HP standar ── */
+@media(min-width:400px) and (max-width:599px){
+  .berita-grid,.skeleton-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .header{padding:0 4%;height:54px}
+  .header-title{display:none}
+  .toolbar{top:54px;padding:10px 4%;gap:7px;flex-wrap:wrap}
+  .search-wrap{min-width:0;flex:1;max-width:100%}
+  .filter-row{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .filter-row::-webkit-scrollbar{display:none}
+  .ftag{font-size:11px;padding:5px 11px;flex-shrink:0}
+  .hero-strip{padding:20px 4% 16px}
+  .hero-eyebrow{font-size:10px;margin-bottom:6px}
+  .hero-title{font-size:22px;gap:8px}
+  .hero-title svg{width:22px;height:22px}
+  .hero-sub{font-size:12.5px;line-height:1.6}
+  .body{padding:18px 4%}
+  .stats-row{gap:8px;margin-bottom:16px}
+  .stat-chip{font-size:11px;padding:6px 10px}
+  /* Card layout horizontal di sm — lebih nyaman scroll */
+  .berita-card{flex-direction:row;height:110px;min-height:unset}
+  .card-img-wrap{
+    width:120px;min-width:120px;aspect-ratio:unset;height:100%;
+    border-radius:0;
+  }
+  .card-body{padding:10px 12px}
+  .card-title{font-size:13px;-webkit-line-clamp:2;margin-bottom:4px}
+  .card-desc{-webkit-line-clamp:2;font-size:11.5px;margin-bottom:8px}
+  .card-footer{padding-top:6px}
+  .card-date,.card-author{font-size:10.5px}
+  /* Skeleton horizontal juga */
+  .skeleton-card{display:flex;height:110px}
+  .skel-img{width:120px;min-width:120px;aspect-ratio:unset;height:100%;border-radius:0}
+  .skel-body{flex:1;padding:10px 12px}
+  /* Footer compact */
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:12px}
+  .page-footer{padding:20px 4% 16px;margin-top:32px}
+  /* Modal full-bottom-sheet */
+  .modal-box{border-radius:20px 20px 0 0;max-height:92vh}
+  .modal-title{font-size:15px}
+  .modal-body{padding:12px 16px 24px}
+  .modal-header{padding:14px 16px 12px}
+  .modal-img-section{padding:0 16px}
+  .modal-img{max-height:180px}
+}
+
+/* ── xs: < 400px — HP kecil (SE, Fold, lebar sempit) ── */
+@media(max-width:399px){
+  .berita-grid,.skeleton-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .header{padding:0 3.5%;height:52px}
+  .header-title{display:none}
+  .btn-back{font-size:12px;padding:6px 10px;gap:5px}
+  .toolbar{top:52px;padding:9px 3.5%;gap:6px;flex-wrap:wrap}
+  .search-wrap{min-width:0;flex:1;max-width:100%}
+  .search-input{font-size:12px;padding:7px 10px 7px 30px}
+  .filter-row{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .filter-row::-webkit-scrollbar{display:none}
+  .ftag{font-size:10.5px;padding:4px 10px;flex-shrink:0}
+  .hero-strip{padding:16px 3.5% 14px}
+  .hero-eyebrow{display:none}
+  .hero-title{font-size:20px;gap:7px;margin-bottom:6px}
+  .hero-title svg{width:20px;height:20px}
+  .hero-sub{font-size:12px;line-height:1.55}
+  .body{padding:14px 3.5%}
+  .stats-row{display:none}
+  /* Card horizontal xs — lebih ringkas */
+  .berita-card{flex-direction:row;height:100px}
+  .card-img-wrap{width:100px;min-width:100px;aspect-ratio:unset;height:100%;border-radius:0}
+  .card-body{padding:8px 10px}
+  .card-title{font-size:12.5px;-webkit-line-clamp:2;margin-bottom:4px}
+  .card-desc{display:none}
+  .card-footer{padding-top:6px}
+  .card-date{font-size:10px}
+  .card-author{display:none}
+  .card-badge{font-size:8.5px;padding:2px 6px}
+  /* Skeleton xs */
+  .skeleton-card{display:flex;height:100px}
+  .skel-img{width:100px;min-width:100px;aspect-ratio:unset;height:100%;border-radius:0}
+  .skel-body{flex:1;padding:8px 10px}
+  .skel-line.desc3,.skel-line.author{display:none}
+  /* Footer xs */
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:10px}
+  .footer-brand{font-size:12px}
+  .footer-brand span{font-size:10px}
+  .social-btn{width:30px;height:30px}
+  .social-btn svg{width:14px;height:14px}
+  .page-footer{padding:16px 3.5% 14px;margin-top:24px}
+  .footer-copy{font-size:10.5px}
+  /* Modal xs */
+  .modal-box{border-radius:16px 16px 0 0;max-height:95vh}
+  .modal-title{font-size:14px;line-height:1.4}
+  .modal-header{padding:12px 14px 10px}
+  .modal-body{padding:10px 14px 20px}
+  .modal-img-section{padding:0 14px}
+  .modal-img{max-height:160px}
+  .modal-desc{font-size:13px}
+  .modal-close{width:28px;height:28px;top:10px;right:10px}
+}
+
+/* ── Modal: slide-up default mobile, centered dialog tablet+ ── */
+@media(min-width:600px){
+  .modal-overlay{align-items:center}
+  .modal-box{border-radius:16px;max-height:85vh}
+  .modal-drag{display:none}
+}
+
+/* ── Touch device: hapus hover transform agar tidak stuck ── */
+@media(hover:none){
+  .berita-card:hover{transform:none;box-shadow:none}
+  .berita-card:hover .card-img{transform:none}
+  .social-btn:hover{transform:none}
+  /* Active state sebagai pengganti hover di touch */
+  .berita-card:active{box-shadow:0 4px 16px rgba(11,46,95,0.10)}
+  .social-btn:active{background:rgba(255,255,255,0.22)}
+}
+
+/* ── Reduced motion ── */
+@media(prefers-reduced-motion:reduce){
+  .berita-card{opacity:1;transform:none}
+  .berita-card.is-visible{transition:none}
+  .berita-card:hover{transform:none}
+  .berita-card:hover .card-img{transform:none}
+  .skel-img,.skel-line{animation:none}
+  .modal-box{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a class="btn-back" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Kembali
+  </a>
+  <span class="header-title">FEB UNMURA — Berita</span>
+  <div class="header-right"></div>
+</header>
+
+<!-- HERO -->
+<div class="hero-strip">
+  <div class="hero-content">
+    <div class="hero-eyebrow">FEB UNMURA</div>
+    <div class="hero-title">
+      <!-- UPGRADE #2: SVG icon, bukan emoji -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+        <path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/>
+      </svg>
+      Berita Terkini
+    </div>
+    <div class="hero-sub">Informasi seputar kegiatan, prestasi, dan perkembangan terbaru Fakultas Ekonomi dan Bisnis Universitas Musi Rawas.</div>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="search-wrap">
+    <!-- UPGRADE #2: SVG icon pencarian -->
+    <span class="search-ico">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+    <input id="search-input" class="search-input" type="text" placeholder="Cari berita…" oninput="onSearchInput()">
+  </div>
+  <div class="filter-row" id="filter-row">
+    <button class="ftag active" data-kat="Semua" onclick="setFilter('Semua',this)">Semua</button>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- Stats -->
+  <div class="stats-row" id="stats-row" style="display:none">
+    <div class="stat-chip">
+      <!-- UPGRADE #2: SVG icon bukan emoji -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+      </svg>
+      Total: <strong id="stat-total">0</strong> berita
+    </div>
+    <div class="stat-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v10l4 2"/><circle cx="12" cy="12" r="10"/>
+      </svg>
+      Bulan ini: <strong id="stat-baru">0</strong> baru
+    </div>
+  </div>
+
+  <!-- Grid — UPGRADE #1: skeleton tampil dulu via JS -->
+  <div class="berita-grid" id="berita-grid">
+    <!-- skeleton default sebelum JS boot -->
+  </div>
+
+</div>
+
+<!-- FOOTER: UPGRADE #10 — ikon sosmed -->
+<footer class="page-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      FEB UNMURA
+      <span>Fakultas Ekonomi dan Bisnis — Universitas Musi Rawas</span>
+    </div>
+    <div class="footer-socials">
+      <!-- Instagram -->
+      <a class="social-btn" href="#" title="Instagram" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+        </svg>
+      </a>
+      <!-- Facebook -->
+      <a class="social-btn" href="#" title="Facebook" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+        </svg>
+      </a>
+      <!-- YouTube -->
+      <a class="social-btn" href="#" title="YouTube" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+      </a>
+      <!-- WhatsApp -->
+      <a class="social-btn" href="#" title="WhatsApp" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2025 Fakultas Ekonomi dan Bisnis — Universitas Musi Rawas. Hak cipta dilindungi.</p>
+  <div style="text-align:center;margin-top:8px">
+    <button class="btn-clear-cache" onclick="clearCache();location.reload()" title="Paksa ambil data terbaru dari server">
+      ↺ Refresh data
+    </button>
+  </div>
+</footer>
+
+<!-- UPGRADE #5: MODAL DETAIL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBackdrop(event)">
+  <div class="modal-box" id="modal-box">
+    <div class="modal-drag"></div>
+    <div class="modal-header" id="modal-header">
+      <button class="modal-close" onclick="closeModal()" aria-label="Tutup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="modal-badge" id="modal-badge"></div>
+      <div class="modal-title" id="modal-title"></div>
+      <div class="modal-meta" id="modal-meta"></div>
+    </div>
+    <div class="modal-img-section" id="modal-img-wrap"></div>
+    <div class="modal-body">
+      <hr class="modal-divider">
+      <div class="modal-desc" id="modal-desc"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// KONFIGURASI — samakan dengan index_2.html
+// Kolom: Judul | Tanggal | Deskripsi | Gambar | Kategori | Penulis
+const SHEETDB_BERITA_URL = "https://sheetdb.io/api/v1/m1x7vrf9kqd1r";
+// ════════════════════════════════════════════
+
+const MONTHS = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Ags","Sep","Okt","Nov","Des"];
+
+// ── SVG ICONS (inline, 0 request, mengganti emoji) ──
+const ICON = {
+  calendar:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>`,
+  pen:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+  newspaper:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>`,
+  search:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`,
+  warning:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>`,
+};
+
+// Badge colors
+const BADGE_MAP = {
+  "prestasi": {bg:"#FFF4E6",color:"#C4750A"},
+  "kerjasama":{bg:"#FBF4E4",color:"#C4962A"},
+  "akademik": {bg:"#E6F1FB",color:"#185FA5"},
+  "kegiatan": {bg:"#E6F5F1",color:"#2B9D7A"},
+  "seminar":  {bg:"#F3F0FB",color:"#6B4FC2"},
+  "mahasiswa":{bg:"#E8F4FD",color:"#1A6FA3"},
+  "penelitian":{bg:"#FFF0F0",color:"#C0392B"},
+  "pengabdian":{bg:"#E8F8F0",color:"#1E7E4A"},
+  "wisuda":   {bg:"#FFF8E6",color:"#B8860B"},
+};
+function getBadgeStyle(k){
+  const s = BADGE_MAP[k.toLowerCase().trim()];
+  return s ? `background:${s.bg};color:${s.color}` : "background:#E6F1FB;color:#185FA5";
+}
+function getBadgeStyleObj(k){
+  return BADGE_MAP[k.toLowerCase().trim()] || {bg:"#E6F1FB",color:"#185FA5"};
+}
+
+// Parse tanggal
+function parseDate(str){
+  if(!str) return null;
+  str = str.toString().trim();
+  let m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(m) return new Date(+m[3],+m[2]-1,+m[1]);
+  m = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(m) return new Date(+m[1],+m[2]-1,+m[3]);
+  const d = new Date(str);
+  return isNaN(d) ? null : d;
+}
+function fmtDate(d){
+  if(!d) return "—";
+  return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+}
+function isThisMonth(d){
+  if(!d) return false;
+  const now = new Date();
+  return d.getMonth()===now.getMonth() && d.getFullYear()===now.getFullYear();
+}
+
+// State global
+let ALL_DATA   = [];
+let FILTER_KAT = "Semua";
+let _searchTimer = null;
+
+// UPGRADE #5: Debounce search
+function onSearchInput(){
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(render, 200);
+}
+
+// Rows → objects
+function toData(rows){
+  const items = rows.map(r=>{
+    const judul    = (r.Judul    ||r.judul    ||r.Title      ||r.title      ||"").trim();
+    const tanggal  =  r.Tanggal  ||r.tanggal  ||r.Date       ||r.date       ||"";
+    const deskripsi=(r.Deskripsi ||r.deskripsi||r.Description||r.description||"").trim();
+    const gambar   =(r.Gambar    ||r.gambar   ||r.Image      ||r.image      ||r.Foto||r.foto||"").trim();
+    const kategori =(r.Kategori  ||r.kategori ||r.Category   ||r.category   ||"Umum").trim();
+    const penulis  =(r.Penulis   ||r.penulis  ||r.Author     ||r.author     ||"").trim();
+    if(!judul) return null;
+    return { judul, dateObj:parseDate(tanggal), deskripsi, gambar, kategori, penulis };
+  }).filter(Boolean);
+  items.sort((a,b)=>{
+    if(!a.dateObj&&!b.dateObj) return 0;
+    if(!a.dateObj) return 1;
+    if(!b.dateObj) return -1;
+    return b.dateObj-a.dateObj;
+  });
+  return items;
+}
+
+// Build filter pills
+function buildFilters(){
+  const kategories = [...new Set(ALL_DATA.map(d=>d.kategori))].sort();
+  const row = document.getElementById("filter-row");
+  row.innerHTML = `<button class="ftag active" data-kat="Semua" onclick="setFilter('Semua',this)">Semua</button>`;
+  kategories.forEach(k=>{
+    const btn = document.createElement("button");
+    btn.className="ftag"; btn.dataset.kat=k; btn.textContent=k;
+    btn.onclick=function(){ setFilter(k,this); };
+    row.appendChild(btn);
+  });
+}
+
+// Update stats
+function updateStats(){
+  const baru = ALL_DATA.filter(d=>isThisMonth(d.dateObj)).length;
+  const el = id=>document.getElementById(id);
+  if(el("stat-total")) el("stat-total").textContent = ALL_DATA.length;
+  if(el("stat-baru"))  el("stat-baru").textContent  = baru;
+  const sr = document.getElementById("stats-row");
+  if(sr) sr.style.display = "flex";
+}
+
+// Set filter aktif
+function setFilter(kat,el){
+  FILTER_KAT=kat;
+  document.querySelectorAll(".ftag").forEach(b=>b.classList.remove("active"));
+  if(el) el.classList.add("active");
+  render();
+}
+
+// UPGRADE #11: IntersectionObserver untuk animasi fadeUp
+let _observer = null;
+function setupObserver(){
+  if(_observer) _observer.disconnect();
+  _observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add("is-visible");
+        _observer.unobserve(e.target);
+      }
+    });
+  },{threshold:0.08});
+  document.querySelectorAll(".berita-card").forEach(c=>_observer.observe(c));
+}
+
+// Render grid
+function render(){
+  const q = (document.getElementById("search-input")||{value:""}).value.toLowerCase();
+  const filtered = ALL_DATA.filter(d=>{
+    const katOk = FILTER_KAT==="Semua" || d.kategori===FILTER_KAT;
+    const txtOk = !q ||
+      d.judul.toLowerCase().includes(q) ||
+      d.deskripsi.toLowerCase().includes(q) ||
+      d.kategori.toLowerCase().includes(q) ||
+      d.penulis.toLowerCase().includes(q);
+    return katOk && txtOk;
+  });
+
+  const grid = document.getElementById("berita-grid");
+  if(!grid) return;
+
+  if(!filtered.length){
+    grid.innerHTML = `<div class="state-wrap">
+      <div class="state-icon">${ICON.search}</div>
+      <div class="state-title">Tidak ditemukan</div>
+      <div class="state-sub">Coba ubah filter atau kata kunci pencarian.</div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((item, idx)=>{
+    const badgeStyle = getBadgeStyle(item.kategori);
+    const tgl        = fmtDate(item.dateObj);
+    // delay animasi bertingkat, max 0.35s
+    const delay      = Math.min(idx * 0.07, 0.35).toFixed(2);
+
+    // UPGRADE #2: fallback SVG bukan emoji
+    const fallbackSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>`;
+
+    // Optimasi gambar:
+    // - 3 card pertama pakai fetchpriority="high" + loading="eager" (above-the-fold)
+    // - Sisanya lazy + decoding async
+    // - sizes memberi tahu browser lebar render sebenarnya → download ukuran tepat
+    const isAboveFold = idx < 3;
+    const imgHTML = item.gambar
+      ? `<img class="card-img"
+           src="${item.gambar}"
+           alt="${item.judul}"
+           loading="${isAboveFold ? 'eager' : 'lazy'}"
+           decoding="${isAboveFold ? 'sync' : 'async'}"
+           fetchpriority="${isAboveFold ? 'high' : 'low'}"
+           sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw"
+           width="400" height="225"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : "";
+    const fallbackStyle = item.gambar ? "display:none" : "display:flex";
+
+    const descHTML    = item.deskripsi ? `<div class="card-desc">${item.deskripsi}</div>` : "";
+    const penulisHTML = item.penulis
+      ? `<span class="card-author">${ICON.pen} ${item.penulis}</span>`
+      : "";
+
+    // UPGRADE #7: data-kat untuk left-border accent
+    return `<div class="berita-card" data-kat="${item.kategori}" style="transition-delay:${delay}s" onclick="openModal(${idx})">
+      <div class="card-img-wrap">
+        ${imgHTML}
+        <div class="card-img-fallback" style="${fallbackStyle}">${fallbackSVG}</div>
+        <span class="card-badge" style="${badgeStyle}">${item.kategori}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${item.judul}</div>
+        ${descHTML}
+        <div class="card-footer">
+          <span class="card-date">${ICON.calendar} ${tgl}</span>
+          ${penulisHTML}
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
+  // Setelah render, jalankan IntersectionObserver
+  // Tapi jika prefers-reduced-motion, langsung tampilkan
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  if(prefersReduced){
+    document.querySelectorAll(".berita-card").forEach(c=>c.classList.add("is-visible"));
+  } else {
+    // UPGRADE #11: IntersectionObserver
+    setupObserver();
+  }
+}
+
+// UPGRADE #1: Skeleton loading — menampilkan 6 skeleton card
+function setLoading(){
+  const grid = document.getElementById("berita-grid");
+  if(!grid) return;
+  const skeletonCard = `
+    <div class="skeleton-card">
+      <div class="skel-img"></div>
+      <div class="skel-body">
+        <div class="skel-line title"></div>
+        <div class="skel-line title2"></div>
+        <div class="skel-line desc"></div>
+        <div class="skel-line desc2"></div>
+        <div class="skel-line desc3"></div>
+        <div class="skel-footer">
+          <div class="skel-line date"></div>
+          <div class="skel-line author"></div>
+        </div>
+      </div>
+    </div>`;
+  // Wrap skeleton dalam skeleton-grid agar kolom sesuai
+  grid.innerHTML = `<div class="skeleton-grid" style="grid-column:1/-1">${skeletonCard.repeat(6)}</div>`;
+}
+
+// Error state
+function setError(msg){
+  const grid = document.getElementById("berita-grid");
+  if(grid) grid.innerHTML = `<div class="state-wrap">
+    <div class="state-icon">${ICON.warning}</div>
+    <div class="state-title">Gagal memuat berita</div>
+    <div class="state-sub">${msg}</div>
+  </div>`;
+}
+
+// UPGRADE #5: Modal detail
+let _currentFiltered = [];
+function openModal(idx){
+  // Ambil data yang sedang tampil (filtered)
+  const q = (document.getElementById("search-input")||{value:""}).value.toLowerCase();
+  const filtered = ALL_DATA.filter(d=>{
+    const katOk = FILTER_KAT==="Semua" || d.kategori===FILTER_KAT;
+    const txtOk = !q ||
+      d.judul.toLowerCase().includes(q) ||
+      d.deskripsi.toLowerCase().includes(q) ||
+      d.kategori.toLowerCase().includes(q) ||
+      d.penulis.toLowerCase().includes(q);
+    return katOk && txtOk;
+  });
+  const item = filtered[idx];
+  if(!item) return;
+
+  const bs = getBadgeStyleObj(item.kategori);
+  document.getElementById("modal-badge").textContent = item.kategori;
+  document.getElementById("modal-badge").style.cssText = `background:${bs.bg};color:${bs.color}`;
+  document.getElementById("modal-title").textContent = item.judul;
+
+  let metaHTML = `<div class="modal-meta-item">${ICON.calendar} ${fmtDate(item.dateObj)}</div>`;
+  if(item.penulis) metaHTML += `<div class="modal-meta-item">${ICON.pen} ${item.penulis}</div>`;
+  document.getElementById("modal-meta").innerHTML = metaHTML;
+
+  const imgWrap = document.getElementById("modal-img-wrap");
+  if(item.gambar){
+    imgWrap.innerHTML = `<img class="modal-img" src="${item.gambar}" alt="${item.judul}" loading="lazy" onerror="this.parentElement.innerHTML=placeholderHTML()">`;
+  } else {
+    imgWrap.innerHTML = placeholderHTML();
+  }
+
+  const desc = item.deskripsi || "<em style='color:#9BAAB8'>Tidak ada deskripsi.</em>";
+  document.getElementById("modal-desc").innerHTML = desc;
+
+  const overlay = document.getElementById("modal-overlay");
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function placeholderHTML(){
+  return `<div class="modal-img-placeholder">${ICON.newspaper}</div>`;
+}
+function closeModal(){
+  const overlay = document.getElementById("modal-overlay");
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+function closeModalOnBackdrop(e){
+  if(e.target === document.getElementById("modal-overlay")) closeModal();
+}
+// Tutup modal dengan Escape
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeModal(); });
+
+// Demo data
+function getDemoData(){
+  return toData([
+    {Judul:"Mahasiswa Akuntansi raih juara 2 olimpiade akuntansi nasional",Tanggal:"28/04/2025",Deskripsi:"Tim mahasiswa FEB UNMURA berhasil meraih juara 2 dalam ajang olimpiade akuntansi tingkat nasional yang diikuti lebih dari 50 perguruan tinggi se-Indonesia. Prestasi ini merupakan buah dari latihan intensif selama tiga bulan di bawah bimbingan dosen pembimbing.",Gambar:"",Kategori:"Prestasi",Penulis:"Humas FEB"},
+    {Judul:"FEB UNMURA tanda tangani MoU dengan PT Digital Nusantara",Tanggal:"20/04/2025",Deskripsi:"Penandatanganan MoU ini membuka peluang magang dan rekrutmen langsung bagi mahasiswa Bisnis Digital FEB UNMURA di perusahaan teknologi terkemuka. Kerja sama ini diharapkan menjadi jembatan antara dunia akademik dan industri.",Gambar:"",Kategori:"Kerjasama",Penulis:"Humas FEB"},
+    {Judul:"Seminar Nasional Akuntansi Berkelanjutan 2025",Tanggal:"15/04/2025",Deskripsi:"FEB UNMURA menyelenggarakan seminar nasional dengan tema akuntansi berkelanjutan yang menghadirkan pembicara dari berbagai institusi terkemuka di Indonesia, termasuk praktisi dari Big Four dan akademisi dari universitas ternama.",Gambar:"",Kategori:"Seminar",Penulis:"Panitia FEB"},
+    {Judul:"Mahasiswa Bisnis Digital juarai kompetisi startup regional",Tanggal:"10/04/2025",Deskripsi:"Tim dari Prodi Bisnis Digital berhasil menjuarai kompetisi startup tingkat regional Sumatera dengan produk aplikasi manajemen UMKM yang dinilai inovatif dan aplikatif bagi pelaku usaha kecil.",Gambar:"",Kategori:"Prestasi",Penulis:"Humas FEB"},
+    {Judul:"Workshop Perpajakan bersama Kantor Pajak Musi Rawas",Tanggal:"05/04/2025",Deskripsi:"Mahasiswa Akuntansi mendapat pembekalan langsung dari praktisi perpajakan melalui workshop kolaborasi dengan KPP Pratama Musi Rawas. Peserta mendapatkan simulasi pengisian SPT dan pemahaman regulasi pajak terkini.",Gambar:"",Kategori:"Kegiatan",Penulis:"Prodi Akuntansi"},
+    {Judul:"FEB UNMURA terima kunjungan studi banding dari STIE Bengkulu",Tanggal:"01/04/2025",Deskripsi:"Kunjungan studi banding ini membahas penguatan kurikulum dan program magang bersama antar dua institusi pendidikan ekonomi. Kedua pihak sepakat untuk melanjutkan kolaborasi dalam penelitian bersama.",Gambar:"",Kategori:"Kegiatan",Penulis:"Humas FEB"},
+  ]);
+}
+
+// ═══════════════════════════════════════════════════════════
+// CACHE localStorage — data disimpan 10 menit lokal
+// Reload halaman → data muncul instan, fetch berjalan di bg
+// ═══════════════════════════════════════════════════════════
+const CACHE_KEY = "feb_berita_cache";
+const CACHE_TTL = 10 * 60 * 1000; // 10 menit dalam ms
+
+function saveCache(rawRows){
+  try{
+    localStorage.setItem(CACHE_KEY, JSON.stringify({
+      ts: Date.now(),
+      rows: rawRows
+    }));
+  } catch(e){ /* storage penuh atau private mode — abaikan */ }
+}
+
+function loadCache(){
+  try{
+    const raw = localStorage.getItem(CACHE_KEY);
+    if(!raw) return null;
+    const obj = JSON.parse(raw);
+    if(!obj || !obj.rows || !obj.ts) return null;
+    if(Date.now() - obj.ts > CACHE_TTL) return null; // kadaluarsa
+    return obj.rows;
+  } catch(e){ return null; }
+}
+
+function clearCache(){
+  try{ localStorage.removeItem(CACHE_KEY); } catch(e){}
+}
+
+// Tampilkan indikator refresh di background
+function showRefreshBadge(text){
+  const old = document.getElementById("refresh-badge");
+  if(old) old.remove();
+  const badge = document.createElement("div");
+  badge.id = "refresh-badge";
+  badge.style.cssText = "position:fixed;bottom:16px;right:16px;z-index:300;background:#0B2E5F;color:#fff;font-size:11.5px;padding:7px 13px;border-radius:20px;box-shadow:0 4px 14px rgba(11,46,95,0.25);display:flex;align-items:center;gap:7px;font-family:var(--font-sans);transition:opacity .3s";
+  badge.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>${text}`;
+  document.body.appendChild(badge);
+  return badge;
+}
+
+// Boot utama
+async function init(){
+  // MODE DEMO — jika URL belum diganti
+  if(SHEETDB_BERITA_URL.includes("GANTI_DENGAN")){
+    ALL_DATA = getDemoData();
+    buildFilters(); updateStats(); render();
+    const grid = document.getElementById("berita-grid");
+    if(grid){
+      const banner = document.createElement("div");
+      banner.style.cssText = "grid-column:1/-1;background:#FFF8E6;border:1px solid #C4962A;border-radius:8px;padding:11px 15px;font-size:12px;color:#7A5C00;display:flex;gap:8px;align-items:flex-start;margin-bottom:4px";
+      banner.innerHTML = `<strong>Mode Demo:</strong>&nbsp;Ganti <code>SHEETDB_BERITA_URL</code> dengan URL API SheetDB Anda.`;
+      grid.insertBefore(banner, grid.firstChild);
+    }
+    return;
+  }
+
+  // CEK CACHE — tampilkan data cache dulu (instan), fetch di background
+  const cachedRows = loadCache();
+  if(cachedRows){
+    ALL_DATA = toData(cachedRows);
+    buildFilters(); updateStats(); render();
+    // Fetch background untuk perbarui cache
+    fetchAndRefresh(true);
+  } else {
+    // Tidak ada cache → skeleton + fetch normal
+    setLoading();
+    fetchAndRefresh(false);
+  }
+}
+
+async function fetchAndRefresh(isBackground){
+  const badge = isBackground ? showRefreshBadge("Memperbarui data…") : null;
+  try{
+    const res  = await fetch(SHEETDB_BERITA_URL, { cache:"no-cache" });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    if(!Array.isArray(json)||!json.length) throw new Error("Data kosong.");
+    saveCache(json); // simpan raw rows ke cache
+    const newData = toData(json);
+    // Hanya re-render jika data berbeda
+    if(JSON.stringify(newData) !== JSON.stringify(ALL_DATA)){
+      ALL_DATA = newData;
+      buildFilters(); updateStats(); render();
+    }
+    if(badge){
+      badge.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Data terbaru`;
+      setTimeout(()=>{ badge.style.opacity="0"; setTimeout(()=>badge.remove(),350); }, 1800);
+    }
+  } catch(err){
+    if(!isBackground){
+      setError(`Tidak dapat mengambil data. (${err.message})`);
+    } else if(badge){
+      badge.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FCA5A5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Gagal refresh`;
+      setTimeout(()=>{ badge.style.opacity="0"; setTimeout(()=>badge.remove(),350); }, 2500);
+    }
+  }
+}
+
+init();
+</script>
+</body>
+</html>
